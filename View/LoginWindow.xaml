@@ -130,7 +130,7 @@
                     <Hyperlink>忘记密码</Hyperlink>
                 </TextBlock>
 
-                <Button Grid.Row="6" Content="登   录" />
+                <Button Grid.Row="6" Content="登    录" />
                 <TextBlock Grid.Row="7" Text="Error Message" />
             </Grid>
         </Border>
