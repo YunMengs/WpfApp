@@ -40,7 +40,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border
-                            x:Name="boder"
+                            x:Name="border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -56,6 +56,15 @@
                                     BorderBrush="#DDD"
                                     BorderThickness="0,0,1,0" />
                                 <TextBlock
+                                    x:Name="markText"
+                                    Grid.Column="1"
+                                    Margin="2,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="#BBB"
+                                    Text="请输入用户名"
+                                    Visibility="Collapsed" />
+                                <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     FontFamily="{DynamicResource iconfont}"
@@ -63,14 +72,28 @@
                                     Foreground="#DDD"
                                     Text="&#xe8c8;" />
                                 <ScrollViewer
-                                    x:Name="PART_ContentHost"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     MinHeight="20"
                                     VerticalAlignment="Center"
                                     Focusable="False"
                                     HorizontalScrollBarVisibility="Hidden" />
                             </Grid>
+
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.56" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF7EB4EA" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF569DE5" />
+                            </Trigger>
+                            <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}}" Value="">
+                                <Setter TargetName="markText" Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -111,15 +134,22 @@
                     Template="{StaticResource CloseButtonTemplate}" />
 
                 <StackPanel Grid.Row="1">
-                    <TextBlock FontSize="22" Text="衔尾蛇科技" />
-                    <TextBlock Text="一个智能化化平台" />
+                    <TextBlock
+                        FontSize="22"
+                        Foreground="#333"
+                        Text="衔尾蛇科技" />
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        FontSize="12"
+                        Foreground="#888"
+                        Text="一个智能化化平台" />
                 </StackPanel>
 
                 <!--  用户名  -->
                 <TextBox
                     Grid.Row="3"
                     Style="{StaticResource UserNameTextBoxStyle}"
-                    Text="123123" />
+                    Text="" />
                 <PasswordBox Grid.Row="4" Password="123123" />
 
                 <CheckBox
