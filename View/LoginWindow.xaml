@@ -26,7 +26,7 @@
                     VerticalAlignment="Center"
                     FontFamily="{StaticResource iconfont}"
                     FontSize="14"
-                    Text="&#xe69e;" />
+                    Text="&#xeb6a;" />
             </Grid>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
@@ -37,6 +37,7 @@
         <!--  用户名  -->
         <Style x:Key="UserNameTextBoxStyle" TargetType="TextBox">
             <Setter Property="Height" Value="35" />
+            <Setter Property="FontSize" Value="14" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -57,7 +58,7 @@
                                     BorderBrush="#DDD"
                                     BorderThickness="0,0,1,0" />
                                 <TextBlock
-                                    x:Name="markText"
+                                    Name="markText"
                                     Grid.Column="1"
                                     Margin="2,0"
                                     VerticalAlignment="Center"
@@ -71,7 +72,7 @@
                                     FontFamily="{DynamicResource iconfont}"
                                     FontSize="15"
                                     Foreground="#DDD"
-                                    Text="&#xe8c8;" />
+                                    Text="&#xe619;" />
                                 <ScrollViewer
                                     Grid.Column="2"
                                     MinHeight="20"
@@ -79,7 +80,6 @@
                                     Focusable="False"
                                     HorizontalScrollBarVisibility="Hidden" />
                             </Grid>
-
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="False">
@@ -99,7 +99,73 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <!--  密码  -->
+        <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5"
+                            SnapsToDevicePixels="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Margin="0,8,5,8"
+                                    BorderBrush="#DDD"
+                                    BorderThickness="0,0,1,0" />
+                                <TextBlock
+                                    Name="markText"
+                                    Grid.Column="1"
+                                    Margin="2,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="#BBB"
+                                    Text="请输入密码"
+                                    Visibility="Collapsed" />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontFamily="{DynamicResource iconfont}"
+                                    FontSize="15"
+                                    Foreground="#DDD"
+                                    Text="&#xe601;" />
+                                <ScrollViewer
+                                    x:Name="PART_ContentHost"
+                                    Grid.Column="1"
+                                    MinHeight="20"
+                                    VerticalAlignment="Center"
+                                    Focusable="False"
+                                    HorizontalScrollBarVisibility="Hidden"
+                                    VerticalScrollBarVisibility="Hidden" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Opacity" Value="0.56" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF7EB4EA" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF569DE5" />
+                            </Trigger>
+                            <DataTrigger Binding="{Binding Path=Password, RelativeSource={RelativeSource Mode=Self}}" Value="">
+                                <Setter TargetName="markText" Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid
         Width="740"
@@ -151,7 +217,10 @@
                     Grid.Row="3"
                     Style="{StaticResource UserNameTextBoxStyle}"
                     Text="" />
-                <PasswordBox Grid.Row="4" Password="123123" />
+                <PasswordBox
+                    Grid.Row="4"
+                    Password=""
+                    Style="{StaticResource PasswordBoxStyle}" />
 
                 <CheckBox
                     Grid.Row="5"
